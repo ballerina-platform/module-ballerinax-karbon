@@ -219,12 +219,12 @@ isolated function getPathForQueryParam(map<anydata> queryParam, map<Encoding> en
     return restOfPath;
 }
 
-isolated function createBodyParts(record {|anydata...;|} anyRecord, map<Encoding> encodingMap = {})
-returns mime:Entity[]|error {
+isolated function createBodyParts(record {|anydata...;|} anyRecord, map<Encoding> encodingMap = {},
+        map<string> fieldNames = {}) returns mime:Entity[]|error {
     mime:Entity[] entities = [];
     foreach [string, anydata] [key, value] in anyRecord.entries() {
         Encoding encodingData = encodingMap.hasKey(key) ? encodingMap.get(key) : {};
-        string contentDisposition = string `form-data; name=${key};`;
+        string contentDisposition = string `form-data; name=${fieldNames[key] ?: key};`;
         if value is record {byte[] fileContent; string fileName;} {
             string fileContentDisposition = string `${contentDisposition} filename=${value.fileName}`;
             mime:Entity entity = check constructEntity(fileContentDisposition, encodingData,

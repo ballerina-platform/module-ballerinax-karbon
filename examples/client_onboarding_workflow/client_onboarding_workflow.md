@@ -5,11 +5,11 @@ This example onboards a new client in Karbon. It creates the client organization
 ## Prerequisites
 
 - Ballerina Swan Lake 2201.12.0 or later
-- A Karbon API application with its Authorization (Bearer) token and Access Key, found under **Settings > Connected Apps > API Applications**
+- The **Application ID** of your Karbon API application (sent by Karbon by secure message when the application is first registered) and your tenant's **Access Key** (under **Settings > Connected Apps**)
 - Create a `Config.toml` in this directory:
 
   ```toml
-  token = "<Bearer token>"
+  token = "<Application ID, without the Bearer prefix>"
   accessKey = "<Access key>"
   organizationName = "<Client organization name>"
   workItemTitle = "<Onboarding work item title>"

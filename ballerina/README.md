@@ -15,13 +15,11 @@ The Karbon connector lets Ballerina applications work with the [Karbon](https://
 
 To use the connector, you need a Karbon account with API access enabled.
 
-1. Sign in to Karbon and open **Settings > Connected Apps > API Applications**.
+1. Register your API application with Karbon. Karbon sends you the **Application ID** for it by secure message when the application is first registered.
 
-2. Create an API application, or open an existing one, and copy its **Authorization (Bearer) token**.
+2. Sign in to Karbon, open **Settings > Connected Apps**, and copy the **Access Key** for your Karbon tenant.
 
-3. From the same page, copy the **Access Key** for your Karbon tenant.
-
-> **Note:** Karbon expects both values on every request. Provide them once when you create the client: the connector sends the bearer token in the `Authorization` header (as `Bearer <token>`) and the access key in the `AccessKey` header.
+> **Note:** Karbon expects both values on every request. Provide them once when you create the client: the connector sends the application ID in the `Authorization` header (as `Bearer <application ID>`) and the access key in the `AccessKey` header. Configure the application ID on its own, without the `Bearer ` prefix; the client code adds it.
 
 ## Quickstart
 
@@ -36,7 +34,7 @@ import ballerinax/karbon;
 ### Step 2: Create a `Config.toml` file
 
 ```toml
-token = "<Bearer token>"
+token = "<Application ID, without the Bearer prefix>"
 accessKey = "<Access key>"
 ```
 

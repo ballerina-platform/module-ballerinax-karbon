@@ -192,6 +192,11 @@ These changes are done in order to improve the overall usability, and as workaro
 - **Updated**: "The Karbon API provides access to a Karbon practice-management account, including contacts, organizations, client groups, work items, timesheets, invoices and payments."
 - **Reason**: `info.description` becomes the `Client` class doc comment. The original text pointed at a missing file and described header-level credentials, which no longer match the `ApiKeysConfig` constructor.
 
+33. Send the `uploadFile` multipart payload without converting it to JSON (generated code, re-apply after a regenerate)
+- **Original**: `uploadFile` in `ballerina/client.bal` builds its parts with `createBodyParts(check jsondata:toJson(payload).ensureType())`, and `createBodyParts` in `ballerina/utils.bal` names each part after its record field.
+- **Updated**: `uploadFile` passes the typed payload, `createBodyParts(payload, fieldNames = {...})`, with a map from record fields to the wire names in the `@jsondata:Name` annotations (`integration_task_key`, `contact_keys`, `client_group_keys`, `organization_keys`, `workitem_keys`). `createBodyParts` takes that `fieldNames` map as a new optional parameter and uses `fieldNames[key] ?: key` as the part name.
+- **Reason**: `toJson` turns the `file` record's `byte[]` into a JSON integer array, so it no longer matches the file-part branch and the file is sent as its string form. No spec change avoids this, since the spec's property names have to stay as they are on the wire. This is a hand edit to generated `.bal` files, so it must be re-applied after every client regeneration.
+
 ## OpenAPI cli command
 
 The following command was used to generate the Ballerina client from the OpenAPI specification. The command should be executed from the repository root directory.

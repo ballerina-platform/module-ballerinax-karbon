@@ -26,12 +26,13 @@ public function main() returns error? {
     });
     io:println("Created work item ", workItem.title, " with key ", workItem.workItemKey);
 
-    // Step 3: leave a note for the team
+    // Step 3: leave a note for the team on the new work item's timeline
     karbon:NoteResponse note = check karbonClient->createNote({
         subject: "Onboarding started for " + organization.fullName,
         body: "Work item " + workItem.workItemKey + " has been created. Please collect the engagement documents.",
         authorEmailAddress: noteAuthorEmailAddress,
-        assigneeEmailAddress
+        assigneeEmailAddress,
+        timelines: [{entityType: "WorkItem", entityKey: workItem.workItemKey}]
     });
     io:println("Created note ", note.id ?: "");
 }

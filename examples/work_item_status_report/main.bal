@@ -26,7 +26,7 @@ public function main() returns error? {
     int detailCount = workItems.length() < 5 ? workItems.length() : 5;
     foreach int i in 0 ..< detailCount {
         karbon:WorkItemDetails detail = check karbonClient->getWorkItem(workItems[i].workItemKey);
-        io:println(detail.title, " (starts ", detail.startDate, ")");
+        io:println(detail.title, " (starts ", detail.startDate, ", status ", detail.primaryStatus ?: "unknown", ")");
     }
 
     // Step 3: list the teams that the work is distributed across

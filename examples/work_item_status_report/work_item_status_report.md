@@ -5,11 +5,11 @@ This example reports on the work in a Karbon tenant. It pages through every work
 ## Prerequisites
 
 - Ballerina Swan Lake 2201.12.0 or later
-- A Karbon API application with its Authorization (Bearer) token and Access Key, found under **Settings > Connected Apps > API Applications**
+- The **Application ID** of your Karbon API application (sent by Karbon by secure message when the application is first registered) and your tenant's **Access Key** (under **Settings > Connected Apps**)
 - Create a `Config.toml` in this directory:
 
   ```toml
-  token = "<Bearer token>"
+  token = "<Application ID, without the Bearer prefix>"
   accessKey = "<Access key>"
   pageSize = 50
   ```

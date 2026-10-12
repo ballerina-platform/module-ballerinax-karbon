@@ -619,7 +619,13 @@ public isolated client class Client {
         headerValues["Authorization"] = self.apiKeyConfig.authorization;
         map<string|string[]> httpHeaders = http:getHeaderMap(headerValues);
         http:Request request = new;
-        mime:Entity[] bodyParts = check createBodyParts(check jsondata:toJson(payload).ensureType());
+        mime:Entity[] bodyParts = check createBodyParts(payload, fieldNames = {
+            integrationTaskKey: "integration_task_key",
+            contactKeys: "contact_keys",
+            clientGroupKeys: "client_group_keys",
+            organizationKeys: "organization_keys",
+            workitemKeys: "workitem_keys"
+        });
         request.setBodyParts(bodyParts);
         return self.clientEp->post(resourcePath, request, httpHeaders);
     }
