@@ -2,13 +2,19 @@
 
 The `ballerinax/karbon` connector provides practical examples illustrating usage in various scenarios.
 
-[//]: # (TODO: Add examples)
-1. 
-2. 
+1. [Client onboarding workflow](./client_onboarding_workflow/client_onboarding_workflow.md) - Creates a client organization, opens an onboarding work item for it and leaves a note for the team.
+2. [Work item status report](./work_item_status_report/work_item_status_report.md) - Pages through all work items, prints the latest ones in detail and lists the firm's teams.
 
 ## Prerequisites
 
-[//]: # (TODO: Add prerequisites)
+1. Create a Karbon API application and note its Authorization (Bearer) token and Access Key, as described in the [setup guide](https://github.com/ballerina-platform/module-ballerinax-karbon/blob/main/ballerina/README.md#setup-guide).
+
+2. For each example, create a `Config.toml` file with the related configuration. Here's an example of how your `Config.toml` file should look:
+
+    ```toml
+    token = "<Bearer token>"
+    accessKey = "<Access key>"
+    ```
 
 ## Running an example
 
